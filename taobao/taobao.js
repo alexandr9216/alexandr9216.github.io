@@ -22,7 +22,6 @@
         '<p>'+ html_block_result_preview +'</p>'+
         '<a href="#" rel="modal:close">Close</a>'+
         '</div>'+
-        '<p><a href="#ex1" rel="modal:open">Open Modal</a></p>'+
         '';
     $('body').prepend(modal);
 
@@ -35,6 +34,7 @@
         '<h1>' + title + '</h1>' +
         //'<img src="' + arr_gallery_image[0] + '" width="100" />' +
         '<button id="start-test-wolf" type="button">zzz Тест zzz</button>' +
+        '<p><a href="#ex1" rel="modal:open">Open Modal</a></p>'+
         '</div>';
 
     $('body').prepend(html);
