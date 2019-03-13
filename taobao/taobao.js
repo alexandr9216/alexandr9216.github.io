@@ -58,6 +58,7 @@
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
 
+
         //get_product_option();
         //get_product_option_sku_map_price();
         //get_product_spec();
