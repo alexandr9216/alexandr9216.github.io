@@ -52,9 +52,8 @@
     //click
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
-        var product_title = get_product_title();
-        product_title = product_title.trim();
-        $('#block_result_preview input').val( product_title );
+
+        $('#block_result_preview input').val( get_product_title() );
 
 
         //get_product_option();
@@ -74,7 +73,7 @@
 
     //Заголовок продукта
     function get_product_title() {
-        var title = $("#J_DetailMeta .tb-detail-hd h1").text();
+        var title = $("#J_DetailMeta .tb-detail-hd h1").text().trim();
         var title_desc = $("#J_DetailMeta .tb-detail-hd .newp").text();
         return title;
     }
