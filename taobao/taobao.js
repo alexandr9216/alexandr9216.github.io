@@ -60,7 +60,7 @@
 
         arr_gallery_image.forEach(function(item, i, arr_gallery_image) {
             //alert( i + ": " + item + " (массив:" + arr + ")" );
-            $('#block_result_preview .brp_images').prepend('<div class="wrap-img"><img src="'+ item +'" /></div>');
+            $('#block_result_preview .brp_images').prepend('<div class="wrap-img"><span class="btn-delete">Удалить</span><img src="'+ item +'" /></div>');
         });
 
 
