@@ -15,7 +15,16 @@
         ''+
     '';
 
-    $('body').prepend(html_block_result_preview);
+    //$('body').prepend(html_block_result_preview);
+
+    var modal = ''+
+        '<div id="ex1" class="modal">'+
+        '<p>'+ html_block_result_preview +'</p>'+
+        '<a href="#" rel="modal:close">Close</a>'+
+        '</div>'+
+        '<p><a href="#ex1" rel="modal:open">Open Modal</a></p>'+
+        '';
+    $('body').prepend(modal);
 
 
 
