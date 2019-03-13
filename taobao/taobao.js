@@ -75,7 +75,7 @@
     function get_product_title() {
         var title = $("#J_DetailMeta .tb-detail-hd h1").text();
         var title_desc = $("#J_DetailMeta .tb-detail-hd .newp").text();
-        return title;
+        return title.trim();
     }
 
 
