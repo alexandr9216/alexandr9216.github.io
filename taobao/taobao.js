@@ -52,8 +52,9 @@
     //click
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
-
-        $('#block_result_preview input').val( get_product_title() );
+        var product_title = get_product_title();
+        product_title = product_title.trim();
+        $('#block_result_preview input').val( product_title );
 
 
         //get_product_option();
@@ -75,7 +76,7 @@
     function get_product_title() {
         var title = $("#J_DetailMeta .tb-detail-hd h1").text();
         var title_desc = $("#J_DetailMeta .tb-detail-hd .newp").text();
-        return title.trim();
+        return title;
     }
 
 
