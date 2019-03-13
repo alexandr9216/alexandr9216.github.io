@@ -33,7 +33,7 @@
     var html = '<div id="wolf-block-taobao" style="padding:20px 20px; border-bottom:10px solid red">' +
         '<h1>' + title + '</h1>' +
         //'<img src="' + arr_gallery_image[0] + '" width="100" />' +
-        '<button id="start-test-wolf" type="button">zzz Тест zzz</button>' +
+        '<button id="start-test-wolf" type="button">---[ TEST ]---</button>' +
         '<p><a href="#ex1" rel="modal:open">Open Modal</a></p>'+
         '</div>';
 
