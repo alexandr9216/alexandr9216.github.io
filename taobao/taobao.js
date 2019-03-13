@@ -58,6 +58,12 @@
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
 
+        arr_gallery_image.forEach(function(item, i, arr_gallery_image) {
+            //alert( i + ": " + item + " (массив:" + arr + ")" );
+            $('#block_result_preview .brp_images').prepend('<img src="'+ item +'" />');
+        });
+
+
 
         //get_product_option();
         //get_product_option_sku_map_price();
@@ -149,8 +155,6 @@
         $("#J_DetailMeta #J_UlThumb img").each(function (indx, element) {
             var image_url = $(element).attr('src');
 
-            fix_image(image_url);
-
             arr_gallery_image.push(
                 fix_image(image_url)
             );
@@ -158,17 +162,6 @@
         });
 
         return arr_gallery_image;
-
-        /*
-         var arr_gallery_image = [];
-         $("#J_DetailMeta #J_UlThumb img").each(function(indx, element){
-         var image_url = $(element).attr('src');
-
-         fix_image(image_url);
-
-         arr_gallery_image.push(image_url);
-         });
-         */
 
     }
 
