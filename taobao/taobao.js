@@ -151,7 +151,10 @@
 
             fix_image(image_url);
 
-            arr_gallery_image.push(image_url);
+            arr_gallery_image.push(
+                fix_image(image_url)
+            );
+
         });
 
         return arr_gallery_image;
