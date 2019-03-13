@@ -6,7 +6,7 @@
 
     var html_block_result_preview = '' +
         '<div id="block_result_preview">' +
-            '<div class="brp_title"><textarea width="100%"> </textarea></div>'+
+            '<div class="brp_title"><textarea style="width:100%; height: 56px;"></textarea></div>'+
             '<div class="brp_images"></div>'+
             '<div class="brp_price"></div>'+
             '<div class="brp_var_attr"></div>'+

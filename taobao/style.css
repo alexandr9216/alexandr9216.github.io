@@ -17,5 +17,11 @@ body {
 
 
 .jquery-modal.blocker {
-    z-index:9999999;
+    z-index:9999999 !important;
+}
+.jquery-modal.blocker:before {
+    vertical-align: top !important;
+}
+.jquery-modal.blocker .modal {
+    max-width: unset !important;
 }
