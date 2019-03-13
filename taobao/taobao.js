@@ -55,6 +55,8 @@
 
         $('#block_result_preview textarea').val( get_product_title() );
 
+        arr_gallery_image = get_gallery_image();
+        GM_log(arr_gallery_image);
 
         //get_product_option();
         //get_product_option_sku_map_price();
@@ -149,8 +151,9 @@
             fix_image(image_url);
 
             arr_gallery_image.push(image_url);
-            GM_log(arr_gallery_image);
         });
+
+        return arr_gallery_image;
 
         /*
          var arr_gallery_image = [];
