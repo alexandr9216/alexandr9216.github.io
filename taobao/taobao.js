@@ -6,7 +6,7 @@
 
     var html_block_result_preview = '' +
         '<div id="block_result_preview">' +
-            '<div class="brp_title"><input type="text"/></div>'+
+            '<div class="brp_title"><textarea width="100%"></textarea></div>'+
             '<div class="brp_images"></div>'+
             '<div class="brp_price"></div>'+
             '<div class="brp_var_attr"></div>'+
@@ -53,7 +53,7 @@
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
-        $('#block_result_preview input').val( get_product_title() );
+        $('#block_result_preview textarea').val( get_product_title() );
 
 
         //get_product_option();
