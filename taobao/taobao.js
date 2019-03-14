@@ -53,10 +53,10 @@ jQuery(document).ready(function($) {
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
-        //1)---
+        //1)--- Заголовок
         $('#block_result_preview textarea').val( get_product_title() );
 
-        //2)---
+        //2)--- Галлерея изображений
         $('#block_result_preview .brp_images').html('');
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
@@ -70,9 +70,14 @@ jQuery(document).ready(function($) {
         });
 
 
-        //3)---
-        //$('brp_option_attr')
-        get_product_option();
+        //3)--- Вариативные опции
+        $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
+        var product_option = get_product_option();
+        product_option.forEach(function(item, i, product_option) {
+            $('#block_result_preview .brp_option_attr ul.head-option').prepend(
+                '<li>'+ item.name_option +'</li>'
+            );
+        });
 
 
         //get_product_option();
@@ -226,7 +231,8 @@ jQuery(document).ready(function($) {
 
         });
 
-        GM_log(arr_option);
+        //GM_log(arr_option);
+        return arr_option;
 
     }
 
