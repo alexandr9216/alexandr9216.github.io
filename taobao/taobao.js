@@ -63,6 +63,9 @@ jQuery(document).ready(function($) {
             $('#block_result_preview .brp_images').prepend('<div class="wrap-img"><span class="btn-delete">Удалить</span><img src="'+ item +'" /></div>');
         });
 
+        $('body').on('click', '#block_result_preview .brp_images .btn-delete', function (e) {
+            $(this).closest('.wrap-img').detach();
+        });
 
 
         //get_product_option();
@@ -79,9 +82,7 @@ jQuery(document).ready(function($) {
     });
 
 
-    $('body').on('click', '#block_result_preview .brp_images .btn-delete', function (e) {
-        $(this).closest('.wrap-img').detach();
-    });
+
 
 
     //Заголовок продукта
