@@ -1,4 +1,4 @@
-(function () {
+jQuery(document).ready(function($) {
     //'use strict';
 
     // Your code here...
@@ -78,6 +78,10 @@
 
     });
 
+
+    $('body').on('click', '#block_result_preview .brp_images .btn-delete', function (e) {
+        $(this).closest('.wrap-img').detach();
+    });
 
 
     //Заголовок продукта
@@ -349,4 +353,4 @@
     }
 
 
-})();
+});

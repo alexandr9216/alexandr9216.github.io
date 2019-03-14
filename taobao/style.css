@@ -39,7 +39,8 @@ body {
     display: inline-block;
     /* width: 10px; */
     /* height: 10px; */
-    background: #eb3f3f;
+    background: #fe0000;
+    border: 2px solid #fff;
     color: #ffffff;
     padding: 2px 7px;
     cursor: pointer;
