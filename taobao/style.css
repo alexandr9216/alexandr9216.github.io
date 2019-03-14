@@ -21,7 +21,7 @@ body {
     background: #404040;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: left;
 }
 
 #block_result_preview .brp_images img {

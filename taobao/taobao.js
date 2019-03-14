@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
             '<div class="brp_title"><textarea style="width:100%; height: 56px;"></textarea></div>'+
             '<div class="brp_images"></div>'+
             '<div class="brp_price"></div>'+
-            '<div class="brp_var_attr"></div>'+
+            '<div class="brp_option_attr"></div>'+
             '<div class="brp_desc_attr"></div>'+
             '<div class="brp_desc_content"></div>'+
         ''+
@@ -53,8 +53,10 @@ jQuery(document).ready(function($) {
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
+        //1)---
         $('#block_result_preview textarea').val( get_product_title() );
 
+        //2)---
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
 
@@ -66,6 +68,11 @@ jQuery(document).ready(function($) {
         $('body').on('click', '#block_result_preview .brp_images .btn-delete', function (e) {
             $(this).closest('.wrap-img').detach();
         });
+
+
+        //3)---
+        //$('brp_option_attr')
+        get_product_option();
 
 
         //get_product_option();
