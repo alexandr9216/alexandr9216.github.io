@@ -74,16 +74,19 @@ jQuery(document).ready(function($) {
         $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
         var product_option = get_product_option();
         product_option.forEach(function(item, i, product_option) {
-            var li = $('#block_result_preview .brp_option_attr ul.head-option').prepend(
-                '<li>'+ item.name_option +'</li>'
-            );
 
-            li.prepend('<span>qwerty</span>');
-
+            var html = '';
             var arr_val_option = item.val_option;
             arr_val_option.forEach(function(item2, i2, arr_val_option) {
-
+                html += '<li>'+ item2.name_val +'</li>';
             });
+
+            var li = $('#block_result_preview .brp_option_attr ul.head-option').prepend(
+                '<li>'+ item.name_option +
+                    '<ul>' + html + '</ul>' +
+                '</li>'
+            );
+
 
         });
         GM_log(product_option);
