@@ -78,6 +78,7 @@ jQuery(document).ready(function($) {
                 '<li>'+ item.name_option +'</li>'
             );
         });
+        GM_log(product_option);
 
 
         //get_product_option();
