@@ -57,9 +57,9 @@ jQuery(document).ready(function($) {
         $('#block_result_preview textarea').val( get_product_title() );
 
         //2)---
+        $('#block_result_preview .brp_images').html('');
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
-
         arr_gallery_image.forEach(function(item, i, arr_gallery_image) {
             //alert( i + ": " + item + " (массив:" + arr + ")" );
             $('#block_result_preview .brp_images').prepend('<div class="wrap-img"><span class="btn-delete">Удалить</span><img src="'+ item +'" /></div>');
