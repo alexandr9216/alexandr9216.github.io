@@ -110,6 +110,15 @@ jQuery(document).ready(function($) {
             } else {
                 $(this).closest('ul').find('li').removeClass('active');
                 $(this).addClass('active');
+
+                var all_active = true;
+                $('#block_result_preview .brp_option_attr ul.head-option > li').filter(function(index){
+                    if ( $('li.active', this).length == 0 ) {
+                        all_active = false;
+                    }
+                });
+
+                if (all_active) { alert('all_active'); }
             }
 
         });
@@ -118,7 +127,7 @@ jQuery(document).ready(function($) {
 
 
         //get_product_option();
-        //get_product_option_sku_map_price();
+        get_product_option_sku_map_price();
         //get_product_spec();
         //get_product_detail();
         //get_desc_content();
