@@ -102,6 +102,18 @@ jQuery(document).ready(function($) {
 
 
         });
+
+
+        $('#block_result_preview .brp_option_attr').on('click', 'ul ul li', function (e) {
+            if ( $(this).hasClass('active') ) {
+                $(this).closest('ul').find('li').removeClass('active');
+            } else {
+                $(this).closest('ul').find('li').removeClass('active');
+                $(this).addClass('active');
+            }
+
+        });
+
         GM_log(product_option);
 
 
