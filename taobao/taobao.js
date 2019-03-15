@@ -103,6 +103,7 @@ jQuery(document).ready(function($) {
 
         });
 
+        arr_price = get_product_option_sku_map_price();// цены
 
         $('#block_result_preview .brp_option_attr').on('click', 'ul ul li', function (e) {
             if ( $(this).hasClass('active') ) {
@@ -111,14 +112,36 @@ jQuery(document).ready(function($) {
                 $(this).closest('ul').find('li').removeClass('active');
                 $(this).addClass('active');
 
-                var all_active = true;
+                var all_active = true, arr_id_active = [];
                 $('#block_result_preview .brp_option_attr ul.head-option > li').filter(function(index){
-                    if ( $('li.active', this).length == 0 ) {
+                    var li_active = $('li.active', this);
+                    if ( li_active.length == 0 ) {
                         all_active = false;
+                    } else {
+                        arr_id_active.push( li_active.attr('data-value') );
                     }
                 });
 
-                if (all_active) { alert('all_active'); }
+                if (all_active) {
+                    //alert('all_active');
+                    for (var key in arr_price.skuMap) {
+
+                        var has_skuMap_id = true, skuMap_id = '';
+                        arr_id_active.forEach(function(item, i, arr_id_active) {
+                            if ( !~key.indexOf(';'+item+';') ) {
+                                has_skuMap_id = false;
+                            }
+                        });
+
+                        if (has_skuMap_id) {
+                            alert('find_id');
+                            skuMap_id = key;
+                            console.log(skuMap_id);
+                            break;
+                        }
+                    }
+
+                }
             }
 
         });
@@ -127,7 +150,6 @@ jQuery(document).ready(function($) {
 
 
         //get_product_option();
-        get_product_option_sku_map_price();
         //get_product_spec();
         //get_product_detail();
         //get_desc_content();
@@ -347,6 +369,8 @@ jQuery(document).ready(function($) {
         setTimeout(function run_timer() {
             GM_log(result);
         }, (interval_time * length_skuMap) + 200);
+
+        return result;
 
     }
 
