@@ -126,7 +126,7 @@ jQuery(document).ready(function($) {
                     //alert('all_active');
                     for (var key in arr_price.skuMap) {
 
-                        var has_skuMap_id = true, skuMap_id = '';
+                        var has_skuMap_id = true, activ_skuMap_id = '';
                         arr_id_active.forEach(function(item, i, arr_id_active) {
                             if ( !~key.indexOf(';'+item+';') ) {
                                 has_skuMap_id = false;
@@ -135,8 +135,8 @@ jQuery(document).ready(function($) {
 
                         if (has_skuMap_id) {
                             alert('find_id');
-                            skuMap_id = key;
-                            console.log(skuMap_id);
+                            activ_skuMap_id = arr_price.skuMap[key];
+                            console.log(activ_skuMap_id);
                             break;
                         }
                     }
