@@ -78,6 +78,12 @@ body {
     /* background: #deeeee; */
 }
 
+#block_result_preview .brp_option_attr ul.head-option ul li .block-img {
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 
 

@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 
                 if (item2.image_val.trim() !== '') {
                     var content_val = item2.image_val.trim();
-                    content_val = '<div class="background: url('+content_val+') center no-repeat;"></div>';
+                    content_val = '<div class="block-img" style="background-image: url('+content_val+');"></div>';
                 } else {
                     var content_val = item2.name_val;
                 }
