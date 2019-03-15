@@ -71,6 +71,7 @@ jQuery(document).ready(function($) {
 
 
         //3)--- Вариативные опции
+        $('#block_result_preview .brp_option_attr').html('');
         $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
         var product_option = get_product_option();
         product_option.forEach(function(item, i, product_option) {
