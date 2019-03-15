@@ -78,7 +78,19 @@ jQuery(document).ready(function($) {
             var html = '';
             var arr_val_option = item.val_option;
             arr_val_option.forEach(function(item2, i2, arr_val_option) {
-                html += '<li>'+ item2.name_val +'</li>';
+
+                var id_data_value = item.id_option +':'+ item2.id_val;
+
+                if (item2.image_val.trim() !== '') {
+                    var content_val = item2.image_val.trim();
+                    content_val = '<div class="background: url('+content_val+') center no-repeat;"></div>';
+                } else {
+                    var content_val = item2.name_val;
+                }
+
+                html += '<li data-value="'+ id_data_value +'" title="'+ item2.name_val +'" >'+
+                    content_val +
+                '</li>';
             });
 
             var li = $('#block_result_preview .brp_option_attr ul.head-option').prepend(

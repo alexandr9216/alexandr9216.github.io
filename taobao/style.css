@@ -51,6 +51,35 @@ body {
 
 
 
+#block_result_preview .brp_option_attr ul.head-option > li {
+    font-weight: bold;
+    background: #deeeee;
+    margin: 14px 0;
+    padding: 12px 14px;
+}
+
+#block_result_preview .brp_option_attr ul.head-option ul li {
+    font-weight: normal;
+    /* height: 103px; */
+    padding: 4px;
+    margin: 6px;
+    background: #fff;
+    border: 1px solid #ff7676;
+}
+
+#block_result_preview .brp_option_attr ul.head-option ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: 30px;
+}
+
+#block_result_preview .brp_option_attr {
+    /* background: #deeeee; */
+}
+
+
+
 
 .jquery-modal.blocker {
     z-index:9999999 !important;
