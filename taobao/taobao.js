@@ -134,7 +134,18 @@ jQuery(document).ready(function($) {
                         });
 
                         if (has_skuMap_id) {
-                            alert('find_id');
+                            //alert('find_id');
+                            if (activ_skuMap_id.PromoPrice !== '') {
+                                var html_promo_price = '<span class="hd-promo-price">Цена со скидкой: </span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
+                            } else {
+                                var html_promo_price = '';
+                            }
+
+                            $('#block_result_preview .brp_price').html(
+                                '<span class="hd-price">Цена: </span><span class="price">'+ activ_skuMap_id.price +'</span>'+
+                                html_promo_price
+                            );
+
                             activ_skuMap_id = arr_price.skuMap[key];
                             console.log(activ_skuMap_id);
                             break;
