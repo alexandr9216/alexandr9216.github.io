@@ -53,10 +53,10 @@ jQuery(document).ready(function($) {
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
-        //1)--- Заголовок
+        //1)--- Заголовок ---------------------------------
         $('#block_result_preview textarea').val( get_product_title() );
 
-        //2)--- Галлерея изображений
+        //2)--- Галлерея изображений ---------------------------------
         $('#block_result_preview .brp_images').html('');
         arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
         });
 
 
-        //3)--- Вариативные опции
+        //3)--- Вариативные опции ---------------------------------
         $('#block_result_preview .brp_option_attr').html('');//просто очищаем заранее html блок
         $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
         var product_var_option = get_product_var_option();//получем массив всех вариаций
@@ -172,10 +172,13 @@ jQuery(document).ready(function($) {
 
         GM_log(product_var_option);
 
+        //4) [ Детали продекта ] (из первой вкладки) ---------------------------------
+        var product_detail = get_product_detail();
+        console.log(product_detail);
 
-        //get_product_var_option();
+
         //get_product_spec();
-        //get_product_detail();
+
         //get_desc_content();
 
         //get_link_video();
@@ -202,15 +205,16 @@ jQuery(document).ready(function($) {
     function get_product_detail() {
         var arr_product_detail = [];
         $("#attributes #J_AttrList #J_AttrUL").find('li').each(function (indx, element) {
-            var name = $(element).text();
+            var name = $(element).text().trim();
             var i_str = name.indexOf(':');
             name = (i_str === -1) ? name : name.substring(0, i_str);
 
-            var val = $(element).attr('title');
+            var val = $(element).attr('title').trim();
             arr_product_detail.push({'name': name, 'val': val});
         });
 
-        console.log(arr_product_detail);
+        //console.log(arr_product_detail);
+        return arr_product_detail;
     }
 
 
@@ -223,13 +227,13 @@ jQuery(document).ready(function($) {
                 if ($(element).hasClass('tm-tableAttrSub')) {
                     i++;
                     //console.log($(element).text());
-                    var name = $(element).text();
+                    var name = $(element).text().trim();
                     arr_product_spec[i] = {};
                     arr_product_spec[i]['name'] = name;
                     arr_product_spec[i]['sub'] = [];
                 } else {
-                    var sub_name = $(element).find('th').text();
-                    var sub_val = $(element).find('td').text();
+                    var sub_name = $(element).find('th').text().trim();
+                    var sub_val = $(element).find('td').text().trim();
 
                     arr_product_spec[i]['sub'].push({'sub_name': sub_name, 'sub_val': sub_val});
                 }
@@ -238,7 +242,8 @@ jQuery(document).ready(function($) {
 
         }
 
-        console.log(arr_product_spec);
+        //console.log(arr_product_spec);
+        return arr_product_spec;
     }
 
 
