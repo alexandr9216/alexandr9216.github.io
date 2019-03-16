@@ -73,8 +73,8 @@ jQuery(document).ready(function($) {
         //3)--- Вариативные опции
         $('#block_result_preview .brp_option_attr').html('');//просто очищаем заранее html блок
         $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
-        var product_option = get_product_option();//получем массив всех вариаций
-        product_option.forEach(function(item, i, product_option) {//и проходимся по каждому
+        var product_var_option = get_product_var_option();//получем массив всех вариаций
+        product_var_option.forEach(function(item, i, product_var_option) {//и проходимся по каждому
 
             //выводим html всех вариаций:
             var html = '';
@@ -170,10 +170,10 @@ jQuery(document).ready(function($) {
 
         });
 
-        GM_log(product_option);
+        GM_log(product_var_option);
 
 
-        //get_product_option();
+        //get_product_var_option();
         //get_product_spec();
         //get_product_detail();
         //get_desc_content();
@@ -276,7 +276,7 @@ jQuery(document).ready(function($) {
 
 
     //Получаем Опции:
-    function get_product_option() {
+    function get_product_var_option() {
         var arr_option = [];
         var id_option = 0;
         $("#J_DetailMeta .tb-property .tb-sku .tm-sale-prop").each(function (indx, element) {
@@ -324,12 +324,12 @@ jQuery(document).ready(function($) {
         });
 
         //GM_log(arr_option);
-        return arr_option;
+        return arr_option.reverse();
 
     }
 
 
-    //Получаем Цены (с разными комбинациями опций):
+    //Получаем список всех Цен (с разными комбинациями опций):
     function get_product_option_sku_map_price() {
 
         //Получаем список цен с id вариций опций (но без указания скидок)
@@ -337,13 +337,13 @@ jQuery(document).ready(function($) {
         //Ищем: "skuMap":{ ... } рег.выражение:
         var reg = new RegExp('"skuMap"[\s]*:[\s]*[{][A-Za-z0-9\s;:.,\{\}"]+"[\s]*[}][\s]*[}]', 'ig');
         var result = sku_map.match(reg);
-        result = JSON.parse('{' + result[0] + '}');
+        result = JSON.parse('{' + result[0] + '}');//здесь список цен
         //GM_log(result);
 
         //кликаем по всем вариантам опций по очередно, чтобы узнать скидку
         var i = -1;
-        var length_skuMap = Object.keys(result.skuMap).length;
-        var interval_time = 300;
+        var length_skuMap = Object.keys(result.skuMap).length;//конвертируем объект в массив
+        var interval_time = 300;//c каким интервалом мс. будем кликать
         //alert(length_skuMap);
         for (var key in result.skuMap) {
             i++;
