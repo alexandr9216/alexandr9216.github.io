@@ -106,6 +106,19 @@
 }
 
 
+#block_result_preview .brp_desc_attr table.tab-product_detail .detail-name {
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+#block_result_preview .brp_desc_attr table.tab-product_detail tr {
+    border-bottom: 1px solid #ccc;
+}
+
+#block_result_preview .brp_desc_attr table.tab-product_detail td {
+    padding: 6px 0px;
+}
+
 
 .jquery-modal.blocker {
     z-index:9999999 !important;
