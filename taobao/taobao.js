@@ -135,6 +135,9 @@ jQuery(document).ready(function($) {
 
                         if (has_skuMap_id) {
                             //alert('find_id');
+                            activ_skuMap_id = arr_price.skuMap[key];
+                            console.log(activ_skuMap_id);
+
                             if (activ_skuMap_id.PromoPrice !== '') {
                                 var html_promo_price = '<span class="hd-promo-price">Цена со скидкой: </span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
                             } else {
@@ -146,8 +149,6 @@ jQuery(document).ready(function($) {
                                 html_promo_price
                             );
 
-                            activ_skuMap_id = arr_price.skuMap[key];
-                            console.log(activ_skuMap_id);
                             break;
                         }
                     }
