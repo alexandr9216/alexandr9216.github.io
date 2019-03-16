@@ -139,13 +139,15 @@ jQuery(document).ready(function($) {
                             console.log(activ_skuMap_id);
 
                             if (activ_skuMap_id.PromoPrice !== '') {
-                                var html_promo_price = '<span class="hd-promo-price">Цена со скидкой: </span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
+                                var html_promo_price = '<br><span class="hd-promo-price">Цена со скидкой:</span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
+                                var css_price = 'text-decoration: line-through;';
                             } else {
                                 var html_promo_price = '';
+                                css_price = '';
                             }
 
                             $('#block_result_preview .brp_price').html(
-                                '<span class="hd-price">Цена: </span><span class="price">'+ activ_skuMap_id.price +'</span>'+
+                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'" ty>'+ activ_skuMap_id.price +'</span>'+
                                 html_promo_price
                             );
 

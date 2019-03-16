@@ -46,6 +46,13 @@
     right: 0px;
 }
 
+#block_result_preview .brp_price {
+    font-size: 14px;
+}
+#block_result_preview .brp_price .hd-price,
+#block_result_preview .brp_price .hd-promo-price {
+    font-weight: bold;
+}
 
 
 #block_result_preview .brp_option_attr ul.head-option > li {
