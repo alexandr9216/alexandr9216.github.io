@@ -176,6 +176,14 @@ jQuery(document).ready(function($) {
         var product_detail = get_product_detail();
         console.log(product_detail);
 
+        var html = '';
+        product_detail.forEach(function(item, i, product_detail) {
+            html += '<li>'+ item.name + ' : ' + item.val + '</li>';
+        });
+        html = '<ul class="tab-product_detail">' + html + '</ul>';
+
+        $('#block_result_preview .brp_desc_attr').prepend(html);
+
 
         //get_product_spec();
 
