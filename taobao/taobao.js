@@ -122,6 +122,9 @@ jQuery(document).ready(function($) {
                     }
                 });
 
+
+                $('#block_result_preview .brp_price').html('');
+
                 if (all_active) {
                     //alert('all_active');
                     for (var key in arr_price.skuMap) {
@@ -147,7 +150,7 @@ jQuery(document).ready(function($) {
                             }
 
                             $('#block_result_preview .brp_price').html(
-                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'" ty>'+ activ_skuMap_id.price +'</span>'+
+                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
                                 html_promo_price
                             );
 

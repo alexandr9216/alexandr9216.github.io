@@ -48,6 +48,9 @@
 
 #block_result_preview .brp_price {
     font-size: 14px;
+    margin: 17px 0px;
+    padding: 12px;
+    background: #eedede;
 }
 #block_result_preview .brp_price .hd-price,
 #block_result_preview .brp_price .hd-promo-price {
