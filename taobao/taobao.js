@@ -71,11 +71,12 @@ jQuery(document).ready(function($) {
 
 
         //3)--- Вариативные опции
-        $('#block_result_preview .brp_option_attr').html('');
+        $('#block_result_preview .brp_option_attr').html('');//просто очищаем заранее html блок
         $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
-        var product_option = get_product_option();
-        product_option.forEach(function(item, i, product_option) {
+        var product_option = get_product_option();//получем массив всех вариаций
+        product_option.forEach(function(item, i, product_option) {//и проходимся по каждому
 
+            //выводим html всех вариаций:
             var html = '';
             var arr_val_option = item.val_option;
             arr_val_option.forEach(function(item2, i2, arr_val_option) {
@@ -103,15 +104,21 @@ jQuery(document).ready(function($) {
 
         });
 
-        arr_price = get_product_option_sku_map_price();// цены
 
-        $('#block_result_preview .brp_option_attr').on('click', 'ul ul li', function (e) {
-            if ( $(this).hasClass('active') ) {
+        arr_price = get_product_option_sku_map_price();//получаем массив со всеми ценами
+
+        $('#block_result_preview .brp_option_attr').on('click', 'ul ul li', function (e) {//клик по вариациям товара
+
+            $('#block_result_preview .brp_price').html('');//просто очищаем заранее html блок цены
+
+
+            if ( $(this).hasClass('active') ) {//если элемент вариации был уже выделен, то просто снимаем выделение
                 $(this).closest('ul').find('li').removeClass('active');
-            } else {
+            } else {//если еще не был выделен, то выделяем
                 $(this).closest('ul').find('li').removeClass('active');
                 $(this).addClass('active');
 
+                //проверяем, все ли элементы были выделены
                 var all_active = true, arr_id_active = [];
                 $('#block_result_preview .brp_option_attr ul.head-option > li').filter(function(index){
                     var li_active = $('li.active', this);
@@ -123,12 +130,10 @@ jQuery(document).ready(function($) {
                 });
 
 
-                $('#block_result_preview .brp_price').html('');
+                if (all_active) {//Если все элементы были выделены,
+                    for (var key in arr_price.skuMap) {//то в массиве цен
 
-                if (all_active) {
-                    //alert('all_active');
-                    for (var key in arr_price.skuMap) {
-
+                        //ищем цену для этой комбинации
                         var has_skuMap_id = true, activ_skuMap_id = '';
                         arr_id_active.forEach(function(item, i, arr_id_active) {
                             if ( !~key.indexOf(';'+item+';') ) {
@@ -136,12 +141,13 @@ jQuery(document).ready(function($) {
                             }
                         });
 
-                        if (has_skuMap_id) {
-                            //alert('find_id');
-                            activ_skuMap_id = arr_price.skuMap[key];
+                        if (has_skuMap_id) {//Если цена найдена для текущей выделенной комбинации
+
+                            activ_skuMap_id = arr_price.skuMap[key];//получаем эту цену
                             console.log(activ_skuMap_id);
 
-                            if (activ_skuMap_id.PromoPrice !== '') {
+                            if (activ_skuMap_id.PromoPrice !== '') {//если имеется скидка,
+                                //то добавялем html скидки
                                 var html_promo_price = '<br><span class="hd-promo-price">Цена со скидкой:</span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
                                 var css_price = 'text-decoration: line-through;';
                             } else {
@@ -149,12 +155,13 @@ jQuery(document).ready(function($) {
                                 css_price = '';
                             }
 
+                            //добавляем html цены
                             $('#block_result_preview .brp_price').html(
                                 '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
                                 html_promo_price
                             );
 
-                            break;
+                            break;//останавливаем поиск в цикле, так как уже найдено
                         }
                     }
 
