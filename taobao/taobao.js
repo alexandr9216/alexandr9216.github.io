@@ -172,7 +172,9 @@ jQuery(document).ready(function($) {
 
         GM_log(product_var_option);
 
-        //4) [ Детали продекта ] (из первой вкладки) ---------------------------------
+
+
+        //4) [ Детали продукта ] (из первой вкладки) ---------------------------------
         var product_detail = get_product_detail();
         console.log(product_detail);
 
@@ -186,6 +188,12 @@ jQuery(document).ready(function($) {
         html = '<table class="tab-product_detail">' + html + '</table>';
 
         $('#block_result_preview .brp_desc_attr').prepend(html);
+
+
+
+        //5) [ Спецификация продукта ] ( если есть 2-ая вкладка) ---------------------------------
+        var product_spec = get_product_spec();
+        console.log(product_spec);
 
 
         //get_product_spec();
