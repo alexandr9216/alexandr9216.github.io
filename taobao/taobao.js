@@ -275,10 +275,12 @@ jQuery(document).ready(function($) {
 
             });
 
+
+            //console.log(arr_product_spec);
+            return arr_product_spec;
         }
 
-        //console.log(arr_product_spec);
-        return arr_product_spec;
+        return '';
     }
 
 
@@ -294,7 +296,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-        //GM_log( $($desc_content).html() );
+        GM_log( $($desc_content).html() );
         return $($desc_content).html();
     }
 
