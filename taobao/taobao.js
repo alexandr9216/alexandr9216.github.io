@@ -9,8 +9,9 @@ jQuery(document).ready(function($) {
             '<div class="brp_title"><textarea></textarea></div>'+
             '<div class="brp_images"></div>'+
             '<div class="brp_price"></div>'+
-            '<div class="brp_option_attr"></div>'+
-            '<div class="brp_desc_attr"></div>'+
+            '<div class="brp_var_option"></div>'+
+            '<div class="brp_desc_detail"></div>'+
+            '<div class="brp_desc_spec"></div>'+
             '<div class="brp_desc_content"></div>'+
         ''+
     '';
@@ -53,6 +54,7 @@ jQuery(document).ready(function($) {
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
+        //---------------------------------
         //1)--- Заголовок ---------------------------------
         $('#block_result_preview textarea').val( get_product_title() );
 
@@ -70,9 +72,10 @@ jQuery(document).ready(function($) {
         });
 
 
+        //---------------------------------
         //3)--- Вариативные опции ---------------------------------
-        $('#block_result_preview .brp_option_attr').html('');//просто очищаем заранее html блок
-        $('#block_result_preview .brp_option_attr').prepend('<ul class="head-option"></ul>');
+        $('#block_result_preview .brp_var_option').html('');//просто очищаем заранее html блок
+        $('#block_result_preview .brp_var_option').prepend('<ul class="head-option"></ul>');
         var product_var_option = get_product_var_option();//получем массив всех вариаций
         product_var_option.forEach(function(item, i, product_var_option) {//и проходимся по каждому
 
@@ -95,7 +98,7 @@ jQuery(document).ready(function($) {
                 '</li>';
             });
 
-            var li = $('#block_result_preview .brp_option_attr ul.head-option').prepend(
+            var li = $('#block_result_preview .brp_var_option ul.head-option').prepend(
                 '<li>'+ item.name_option +
                     '<ul>' + html + '</ul>' +
                 '</li>'
@@ -104,10 +107,9 @@ jQuery(document).ready(function($) {
 
         });
 
-
         arr_price = get_product_option_sku_map_price();//получаем массив со всеми ценами
 
-        $('#block_result_preview .brp_option_attr').on('click', 'ul ul li', function (e) {//клик по вариациям товара
+        $('#block_result_preview .brp_var_option').on('click', 'ul ul li', function (e) {//клик по вариациям товара
 
             $('#block_result_preview .brp_price').html('');//просто очищаем заранее html блок цены
 
@@ -120,7 +122,7 @@ jQuery(document).ready(function($) {
 
                 //проверяем, все ли элементы были выделены
                 var all_active = true, arr_id_active = [];
-                $('#block_result_preview .brp_option_attr ul.head-option > li').filter(function(index){
+                $('#block_result_preview .brp_var_option ul.head-option > li').filter(function(index){
                     var li_active = $('li.active', this);
                     if ( li_active.length == 0 ) {
                         all_active = false;
@@ -173,7 +175,7 @@ jQuery(document).ready(function($) {
         GM_log(product_var_option);
 
 
-
+        //---------------------------------
         //4) [ Детали продукта ] (из первой вкладки) ---------------------------------
         var product_detail = get_product_detail();
         console.log(product_detail);
@@ -187,13 +189,28 @@ jQuery(document).ready(function($) {
         });
         html = '<table class="tab-product_detail">' + html + '</table>';
 
-        $('#block_result_preview .brp_desc_attr').prepend(html);
+        $('#block_result_preview .brp_desc_detail').prepend(html);
 
 
-
+        //---------------------------------
         //5) [ Спецификация продукта ] ( если есть 2-ая вкладка) ---------------------------------
         var product_spec = get_product_spec();
         console.log(product_spec);
+
+        var html = '';
+        product_spec.forEach(function (item, i, product_spec) {
+            html += '<tr><th colspan="2">'+ item['name'] +'</th></tr>';
+
+            sub_item = item['sub'];
+            sub_item.forEach(function (item2, i2, sub_item) {
+                html += '<tr><td>'+ item2['sub_name'] +'</td><td>'+ item2['sub_val'] +'</td></tr>';
+            });
+
+        });
+
+        $('#block_result_preview .brp_desc_spec').html(html);
+
+
 
 
         //get_product_spec();
@@ -239,8 +256,8 @@ jQuery(document).ready(function($) {
 
     //вкладка - [спецификации] (самое полное описание)
     function get_product_spec() {
-        var product_spec = $("#J_Detail #J_Attrs table.tm-tableAttr tbody");//вкладка - [спецификации] (самое полное описание)
-        if (product_spec.length !== 0) {//если нет [спецификации], то
+        var product_spec = $("#J_Detail #J_Attrs table.tm-tableAttr:first tbody");//вкладка - [спецификации] (самое полное описание)
+        if (product_spec.length !== 0) {//если есть вкладка [спецификации], то
             var arr_product_spec = [], i = 0;
             $(product_spec).find('tr').each(function (indx, element) {
                 if ($(element).hasClass('tm-tableAttrSub')) {
