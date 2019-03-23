@@ -287,8 +287,8 @@ jQuery(document).ready(function($) {
 
     //Нижнее описание товара -------------
     function get_desc_content() {
-        var $desc_content = $.parseHTML($('#description .content').html());
-        $($desc_content).find('img').each(function (indx, element) {
+        var $desc_content = $('#description .content').clone();//var $desc_content = $.parseHTML($('#description .content').html());
+        $desc_content.find('img').each(function (indx, element) {
             //alert( $(element).attr('src') );
             //$(element).attr('src', 'TEST_'+$(element).attr('src') );
             var img_lazyload = $(element).attr('data-ks-lazyload');
@@ -297,8 +297,8 @@ jQuery(document).ready(function($) {
             }
         });
 
-        GM_log( $($desc_content).html() );
-        return $($desc_content).html();
+        GM_log( $desc_content.html() );
+        return $desc_content.html();
     }
 
 
