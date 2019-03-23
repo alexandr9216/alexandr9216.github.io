@@ -150,6 +150,16 @@
 }
 
 
+#block_result_preview .brp_desc_detail,
+#block_result_preview .brp_desc_spec {
+    display: flex;
+    justify-content: center;
+}
+
+#block_result_preview .brp_desc_content img {
+    text-align: center;
+}
+
 .jquery-modal.blocker {
     z-index:9999999 !important;
 }

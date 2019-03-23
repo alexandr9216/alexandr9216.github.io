@@ -175,7 +175,9 @@ jQuery(document).ready(function($) {
         GM_log(product_var_option);
 
 
-        //---------------------------------
+
+
+
         //4) [ Детали продукта ] (из первой вкладки) ---------------------------------
         var product_detail = get_product_detail();
         console.log(product_detail);
@@ -189,10 +191,12 @@ jQuery(document).ready(function($) {
         });
         html = '<table class="tab-product_detail">' + html + '</table>';
 
-        $('#block_result_preview .brp_desc_detail').prepend(html);
+        $('#block_result_preview .brp_desc_detail').html(html);
 
 
-        //---------------------------------
+
+
+
         //5) [ Спецификация продукта ] ( если есть 2-ая вкладка) ---------------------------------
         var product_spec = get_product_spec();
         if (product_spec !== undefined) { //-если существует вкладка [Спецификация продукта]
@@ -209,11 +213,15 @@ jQuery(document).ready(function($) {
 
             });
 
+            html = '<table class="tab-product_spec">' + html + '</table>';
+
             $('#block_result_preview .brp_desc_spec').html(html);
         }
 
 
-        //---------------------------------
+
+
+
         //6) Описание в самом низу ---------------------------------
         $('#block_result_preview .brp_desc_content').html( get_desc_content() );
 
