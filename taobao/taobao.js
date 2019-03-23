@@ -195,21 +195,22 @@ jQuery(document).ready(function($) {
         //---------------------------------
         //5) [ Спецификация продукта ] ( если есть 2-ая вкладка) ---------------------------------
         var product_spec = get_product_spec();
-        console.log(product_spec);
+        if (product_spec !== undefined) { //-если существует вкладка [Спецификация продукта]
+            //console.log(product_spec);
 
-        var html = '';
-        product_spec.forEach(function (item, i, product_spec) {
-            html += '<tr><th colspan="2">'+ item['name'] +'</th></tr>';
+            var html = '';
+            product_spec.forEach(function (item, i, product_spec) {
+                html += '<tr><th colspan="2">' + item['name'] + '</th></tr>';
 
-            sub_item = item['sub'];
-            sub_item.forEach(function (item2, i2, sub_item) {
-                html += '<tr><td>'+ item2['sub_name'] +'</td><td>'+ item2['sub_val'] +'</td></tr>';
+                sub_item = item['sub'];
+                sub_item.forEach(function (item2, i2, sub_item) {
+                    html += '<tr><td>' + item2['sub_name'] + '</td><td>' + item2['sub_val'] + '</td></tr>';
+                });
+
             });
 
-        });
-
-        $('#block_result_preview .brp_desc_spec').html(html);
-
+            $('#block_result_preview .brp_desc_spec').html(html);
+        }
 
 
         //---------------------------------
@@ -280,7 +281,7 @@ jQuery(document).ready(function($) {
             return arr_product_spec;
         }
 
-        return '';
+        return undefined;
     }
 
 
