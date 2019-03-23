@@ -212,10 +212,9 @@ jQuery(document).ready(function($) {
 
 
 
-
-        //get_product_spec();
-
-        //get_desc_content();
+        //---------------------------------
+        //6) Описание в самом низу ---------------------------------
+        $('#block_result_preview .brp_desc_content').html( get_desc_content() );
 
         //get_link_video();
 
@@ -295,7 +294,8 @@ jQuery(document).ready(function($) {
             }
         });
 
-        GM_log($($desc_content).html());
+        //GM_log( $($desc_content).html() );
+        return $($desc_content).html();
     }
 
 
