@@ -293,7 +293,7 @@ jQuery(document).ready(function($) {
             //$(element).attr('src', 'TEST_'+$(element).attr('src') );
             var img_lazyload = $(element).attr('data-ks-lazyload');
             if (img_lazyload !== undefined) {
-                $(element).attr('src', 'TEST_' + img_lazyload);
+                $(element).attr('src', img_lazyload);
             }
         });
 
