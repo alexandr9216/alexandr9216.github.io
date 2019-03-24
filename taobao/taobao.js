@@ -303,6 +303,9 @@ jQuery(document).ready(function($) {
             if (img_lazyload !== undefined) {
                 $(element).attr('src', img_lazyload);
             }
+
+            $(element).wrap('<div class="wrap-img"></div>');
+            $('.wrap-img', element).prepend('<span class="btn-delete"></span>');
         });
 
         GM_log( $desc_content.html() );
