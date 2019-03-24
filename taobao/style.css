@@ -151,12 +151,12 @@
     margin: 20px 0;
 }
 #block_result_preview .brp_desc_content .wrap-img {
+    position: relative;
     margin: 20px 0;
 }
 #block_result_preview .brp_desc_content .wrap-img img {
     display: inline-block;
 }
-
 
 
 .jquery-modal.blocker {
