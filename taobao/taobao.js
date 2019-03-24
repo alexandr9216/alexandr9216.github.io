@@ -228,10 +228,9 @@ jQuery(document).ready(function($) {
             $(this).closest('.wrap-img').detach();
         });
 
-        //get_link_video();
 
-        //alert('20509:28317');
-        //GM_log($('#J_DetailMeta').html());
+
+        //get_link_video();
 
     });
 
