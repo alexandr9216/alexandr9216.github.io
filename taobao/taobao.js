@@ -54,7 +54,9 @@ jQuery(document).ready(function($) {
     //-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
-        //---------------------------------
+
+
+
         //1)--- Заголовок ---------------------------------
         $('#block_result_preview textarea').val( get_product_title() );
 
@@ -72,8 +74,10 @@ jQuery(document).ready(function($) {
         });
 
 
-        //---------------------------------
-        //3)--- Вариативные опции ---------------------------------
+
+
+
+        //3) Вариативные опции ---------------------------------
         $('#block_result_preview .brp_var_option').html('');//просто очищаем заранее html блок
         $('#block_result_preview .brp_var_option').prepend('<ul class="head-option"></ul>');
         var product_var_option = get_product_var_option();//получем массив всех вариаций
@@ -121,25 +125,26 @@ jQuery(document).ready(function($) {
                 $(this).addClass('active');
 
                 //проверяем, все ли элементы были выделены
-                var all_active = true, arr_id_active = [];
+                var all_select = true, arr_id_current_select = [];
                 $('#block_result_preview .brp_var_option ul.head-option > li').filter(function(index){
                     var li_active = $('li.active', this);
                     if ( li_active.length == 0 ) {
-                        all_active = false;
+                        all_select = false;
                     } else {
-                        arr_id_active.push( li_active.attr('data-value') );
+                        arr_id_current_select.push( li_active.attr('data-value') );
                     }
                 });
 
 
-                if (all_active) {//Если все элементы были выделены,
+                if (all_select) {//Если все элементы были выделены,
                     for (var key in arr_price.skuMap) {//то в массиве цен
 
                         //ищем цену для этой комбинации
                         var has_skuMap_id = true, activ_skuMap_id = '';
-                        arr_id_active.forEach(function(item, i, arr_id_active) {
-                            if ( !~key.indexOf(';'+item+';') ) {
+                        arr_id_current_select.forEach(function(item, i, arr_id_current_select) {
+                            if ( !~key.indexOf(';'+item+';') ) {//если ключ key не подошел
                                 has_skuMap_id = false;
+                                break;
                             }
                         });
 
@@ -160,11 +165,16 @@ jQuery(document).ready(function($) {
                             //добавляем html цены
                             $('#block_result_preview .brp_price').html(
                                 '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
-                                html_promo_price
+                                '<span>'+ html_promo_price +'</span>'
                             );
 
-                            break;//останавливаем поиск в цикле, так как уже найдено
+                            break;//останавливаем поиск в цикле, так как key уже найден
                         }
+                    }
+
+
+                    if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
+                        $('#block_result_preview .brp_price').html('Цена не указана. Возможно товара уже нет в наличии у продавца.');
                     }
 
                 }
@@ -423,7 +433,7 @@ jQuery(document).ready(function($) {
                             $_item_id.find('a')[0].click();
                         }
 
-                        if ($_item_id.hasClass('tb-out-of-stock')) {
+                        if ($_item_id.hasClass('tb-out-of-stock')) {//если данная вариция товара отсутсвует
                             out_of_stock = true;
                         }
 
