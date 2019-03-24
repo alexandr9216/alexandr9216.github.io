@@ -305,7 +305,7 @@ jQuery(document).ready(function($) {
             }
 
             $(element).wrap('<div class="wrap-img"></div>');
-            $('.wrap-img', element).prepend('<span class="btn-delete"></span>');
+            $(element).after('<span class="btn-delete">Удалить</span>');
         });
 
         GM_log( $desc_content.html() );
