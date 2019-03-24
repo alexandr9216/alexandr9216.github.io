@@ -135,7 +135,6 @@ jQuery(document).ready(function($) {
                     }
                 });
 
-
                 if (all_select) {//Если все элементы были выделены,
                     for (var key in arr_price.skuMap) {//то в массиве цен
 
