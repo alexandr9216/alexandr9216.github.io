@@ -224,6 +224,9 @@ jQuery(document).ready(function($) {
 
         //6) Описание в самом низу ---------------------------------
         $('#block_result_preview .brp_desc_content').html( get_desc_content() );
+        $('body').on('click', '#block_result_preview .brp_desc_content .btn-delete', function (e) {
+            $(this).closest('.wrap-img').detach();
+        });
 
         //get_link_video();
 
