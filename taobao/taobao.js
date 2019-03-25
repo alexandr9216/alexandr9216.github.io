@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
                         arr_id_active.forEach(function(item, i, arr_id_active) {
                             if ( !~key.indexOf(';'+item+';') ) {
                                 has_skuMap_id = false;
-                                break;
+                                //break;//-не работает для forEach, либо вместо этого бросать try исключение или заменить на цикл for
                             }
                         });
 
