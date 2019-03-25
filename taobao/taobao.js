@@ -144,6 +144,7 @@ jQuery(document).ready(function($) {
                         arr_id_active.forEach(function(item, i, arr_id_active) {
                             if ( !~key.indexOf(';'+item+';') ) {
                                 has_skuMap_id = false;
+                                break;
                             }
                         });
 
@@ -163,7 +164,8 @@ jQuery(document).ready(function($) {
 
                             //добавляем html цены
                             $('#block_result_preview .brp_price').html(
-                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+ html_promo_price
+                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
+                                '<span>'+html_promo_price+'</span>'
                             );
 
                             break;//останавливаем поиск в цикле, так как уже найдено
@@ -171,7 +173,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('Цена не указана. Возможно товара уже нет в наличии у продавца.');
+                        $('#block_result_preview .brp_price').html('<span>Цена не указана.Возможно товара уже нет в наличии у продавца.</span>');
                     }
 
                 }
