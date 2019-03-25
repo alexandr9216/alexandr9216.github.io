@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
 
         //2)--- Галлерея изображений ---------------------------------
         $('#block_result_preview .brp_images').html('');
-        arr_gallery_image = get_gallery_image();
+        var arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
         arr_gallery_image.forEach(function(item, i, arr_gallery_image) {
             //alert( i + ": " + item + " (массив:" + arr + ")" );
