@@ -125,25 +125,25 @@ jQuery(document).ready(function($) {
                 $(this).addClass('active');
 
                 //проверяем, все ли элементы были выделены
-                var all_select = true, arr_id_current_select = [];
+                var all_active = true, arr_id_active = [];
                 $('#block_result_preview .brp_var_option ul.head-option > li').filter(function(index){
                     var li_active = $('li.active', this);
                     if ( li_active.length == 0 ) {
-                        all_select = false;
+                        all_active = false;
                     } else {
-                        arr_id_current_select.push( li_active.attr('data-value') );
+                        arr_id_active.push( li_active.attr('data-value') );
                     }
                 });
 
-                if (all_select) {//Если все элементы были выделены,
+
+                if (all_active) {//Если все элементы были выделены,
                     for (var key in arr_price.skuMap) {//то в массиве цен
 
                         //ищем цену для этой комбинации
                         var has_skuMap_id = true, activ_skuMap_id = '';
-                        arr_id_current_select.forEach(function(item, i, arr_id_current_select) {
-                            if ( !~key.indexOf(';'+item+';') ) {//если ключ key не подошел
+                        arr_id_active.forEach(function(item, i, arr_id_active) {
+                            if ( !~key.indexOf(';'+item+';') ) {
                                 has_skuMap_id = false;
-                                break;
                             }
                         });
 
@@ -163,14 +163,12 @@ jQuery(document).ready(function($) {
 
                             //добавляем html цены
                             $('#block_result_preview .brp_price').html(
-                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
-                                '<span>'+ html_promo_price +'</span>'
+                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+ html_promo_price
                             );
 
-                            break;//останавливаем поиск в цикле, так как key уже найден
+                            break;//останавливаем поиск в цикле, так как уже найдено
                         }
                     }
-
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
                         $('#block_result_preview .brp_price').html('Цена не указана. Возможно товара уже нет в наличии у продавца.');
