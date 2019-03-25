@@ -173,7 +173,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('<span>Цена не указана.Возможно товара уже нет в наличии у продавца.</span>');
+                        $('#block_result_preview .brp_price').html('<span>Цена не указана</span>');
                     }
 
                 }

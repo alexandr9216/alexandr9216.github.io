@@ -8,7 +8,7 @@
     left: 0;
     display: block;
     width: 30%;
-    z-index: 999999;
+    z-index: 999999999;
 }
 
 #block_result_preview .brp_title textarea {
