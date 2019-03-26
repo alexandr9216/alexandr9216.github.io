@@ -153,13 +153,12 @@ jQuery(document).ready(function($) {
                             activ_skuMap_id = arr_price.skuMap[key];//получаем эту цену
                             console.log(activ_skuMap_id);
 
+                            var html_promo_price = '';
+                            var css_price = '';
                             if (activ_skuMap_id.PromoPrice !== '') {//если имеется скидка,
                                 //то добавялем html скидки
-                                var html_promo_price = '<br><span class="hd-promo-price">Цена со скидкой:</span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
-                                var css_price = 'text-decoration: line-through;';
-                            } else {
-                                var html_promo_price = '';
-                                css_price = '';
+                                html_promo_price = '<br><span class="hd-promo-price">Цена со скидкой:</span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
+                                css_price = 'text-decoration: line-through;';
                             }
 
                             //добавляем html цены
