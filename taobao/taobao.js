@@ -410,7 +410,7 @@ jQuery(document).ready(function($) {
         //кликаем по всем вариантам опций по очередно, чтобы узнать скидку
         var i = -1;
         var length_skuMap = Object.keys(result.skuMap).length;//конвертируем объект в массив
-        var interval_time = 100;//c каким интервалом мс. будем кликать
+        var interval_time = 150;//c каким интервалом мс. будем кликать
         //alert(length_skuMap);
         for (var key in result.skuMap) {
             i++;
