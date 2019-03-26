@@ -401,8 +401,8 @@ jQuery(document).ready(function($) {
         //Получаем список цен с id вариций опций (но без указания скидок)
         var sku_map = $('body').text();
         //Ищем: "skuMap":{ ... } рег.выражение:
-        //вместо /s ставим [^.], чтобы обзначить пробел, а то /s какого то х не работает
-        var reg = new RegExp('"skuMap"[^.]*:[^.]*[{][A-Za-z0-9\s;:.,\{\}"]+"[^.]*[}][^.]*[}]', 'ig');
+        //вместо /s ставим [ \f\n\r\t\v], чтобы обзначить пробел, а то /s какого то х не работает
+        var reg = new RegExp('"skuMap"[ \f\n\r\t\v]*:[ \f\n\r\t\v]*[{][A-Za-z0-9;:.,\{\}"\f\n\r\t\v]+"[ \f\n\r\t\v]*[}][ \f\n\r\t\v]*[}]', 'ig');
         var result = sku_map.match(reg);
         result = JSON.parse('{' + result[0] + '}');//здесь список цен
         //GM_log(result);
