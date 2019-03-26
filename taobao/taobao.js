@@ -90,28 +90,29 @@ jQuery(document).ready(function($) {
 
                 var id_data_value = item.id_option +':'+ item2.id_val;
 
+                var content_val = '';
                 if (item2.image_val.trim() !== '') {
-                    var content_val = item2.image_val.trim();
+                    content_val = item2.image_val.trim();
                     content_val = '<div class="block-img" style="background-image: url('+content_val+');"></div>';
                 } else {
-                    var content_val = item2.name_val;
+                    content_val = item2.name_val;
                 }
 
                 html += '<li data-value="'+ id_data_value +'" title="'+ item2.name_val +'" >'+
                     content_val +
-                '</li>';
+                    '</li>';
             });
 
             var li = $('#block_result_preview .brp_var_option ul.head-option').prepend(
                 '<li>'+ item.name_option +
-                    '<ul>' + html + '</ul>' +
+                '<ul>' + html + '</ul>' +
                 '</li>'
             );
 
 
         });
 
-        arr_price = get_product_option_sku_map_price();//получаем массив со всеми ценами
+        var arr_price = get_product_option_sku_map_price();//получаем массив со всеми ценами
 
         $('#block_result_preview .brp_var_option').on('click', 'ul ul li', function (e) {//клик по вариациям товара
 
