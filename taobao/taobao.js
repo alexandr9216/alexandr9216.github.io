@@ -158,14 +158,14 @@ jQuery(document).ready(function($) {
                             var css_price = '';
                             if (activ_skuMap_id.PromoPrice !== '') {//если имеется скидка,
                                 //то добавялем html скидки
-                                html_promo_price = '<br><pre class="hd-promo-price">Цена со скидкой:</pre><pre class="promo-price">'+ activ_skuMap_id.PromoPrice +'</pre>';
+                                html_promo_price = '<br><code class="hd-promo-price">Цена со скидкой:</code><code class="promo-price">'+ activ_skuMap_id.PromoPrice +'</code>';
                                 css_price = 'text-decoration: line-through;';
                             }
 
                             //добавляем html цены
                             $('#block_result_preview .brp_price').html(
-                                '<pre class="hd-price">Цена:</pre><pre class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</pre>'+
-                                '<pre>'+html_promo_price+'</pre>'
+                                '<code class="hd-price">Цена:</code><code class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</code>'+
+                                '<code>'+html_promo_price+'</code>'
                             );
 
                             break;//останавливаем поиск в цикле, так как уже найдено
@@ -173,7 +173,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('<pre>Цена не указана. Возможно данный товар закончился у продавца.</pre>');
+                        $('#block_result_preview .brp_price').html('<code>Цена не указана. Возможно данный товар закончился у продавца.</code>');
                     }
 
                 }
