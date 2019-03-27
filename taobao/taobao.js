@@ -158,14 +158,14 @@ jQuery(document).ready(function($) {
                             var css_price = '';
                             if (activ_skuMap_id.PromoPrice !== '') {//если имеется скидка,
                                 //то добавялем html скидки
-                                html_promo_price = '<br><span class="hd-promo-price">Цена со скидкой:</span><span class="promo-price">'+ activ_skuMap_id.PromoPrice +'</span>';
+                                html_promo_price = '<br><pre class="hd-promo-price">Цена со скидкой:</pre><pre class="promo-price">'+ activ_skuMap_id.PromoPrice +'</pre>';
                                 css_price = 'text-decoration: line-through;';
                             }
 
                             //добавляем html цены
                             $('#block_result_preview .brp_price').html(
-                                '<span class="hd-price">Цена:</span><span class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</span>'+
-                                '<span>'+html_promo_price+'</span>'
+                                '<pre class="hd-price">Цена:</pre><pre class="price" style="'+css_price+'">'+ activ_skuMap_id.price +'</pre>'+
+                                '<pre>'+html_promo_price+'</pre>'
                             );
 
                             break;//останавливаем поиск в цикле, так как уже найдено
@@ -173,7 +173,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('<span>Цена не указана</span>');
+                        $('#block_result_preview .brp_price').html('<pre>Цена не указана. Возможно данный товар закончился у продавца.</pre>');
                     }
 
                 }
