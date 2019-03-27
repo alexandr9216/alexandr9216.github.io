@@ -150,6 +150,7 @@
 #block_result_preview .brp_desc_content img,
 #block_result_preview .brp_desc_content table {
     border: 4px groove #f00;
+    background: #414141;
     padding: 20px;
 }
 
