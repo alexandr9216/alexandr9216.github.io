@@ -55,6 +55,7 @@
 }
 
 #block_result_preview .brp_price {
+    min-height: 60px;
     font-size: 14px;
     margin: 17px 0px;
     padding: 12px;
