@@ -70,19 +70,23 @@ jQuery(document).ready(function($) {
         //1)--- Заголовок ---------------------------------
         $('#block_result_preview textarea').val( get_product_title() );
 
+
         //2)--- Галлерея изображений ---------------------------------
         $('#block_result_preview .brp_images').html('');
         var arr_gallery_image = get_gallery_image();
         GM_log(arr_gallery_image);
         arr_gallery_image.forEach(function(item, i, arr_gallery_image) {
             //alert( i + ": " + item + " (массив:" + arr + ")" );
-            $('#block_result_preview .brp_images').prepend('<div class="wrap-img"><span class="btn-delete">Удалить</span><img src="'+ item +'" /></div>');
+            $('#block_result_preview .brp_images').prepend('<div data-id="'+i+'" class="wrap-img"><span class="btn-delete">Удалить</span><img src="'+ item +'" /></div>');
         });
 
         $('body').on('click', '#block_result_preview .brp_images .btn-delete', function (e) {
-            $(this).closest('.wrap-img').detach();
+            var $cur_img_wrap = $(this).closest('.wrap-img');//текещее img обернутое в div.wrap-img
+            var id = $cur_img_wrap.attr('data-id');//id картинки из массива arr_gallery_image
+            delete arr_gallery_image[id];//удаляем текушую картинку из массива arr_gallery_image
+            $cur_img_wrap.detach();//удаляем текушую картинку из модольного окна #block_result_preview .brp_images
+            GM_log(arr_gallery_image);
         });
-
 
 
 
@@ -90,9 +94,9 @@ jQuery(document).ready(function($) {
         //3) Вариативные опции ---------------------------------
         $('#block_result_preview .brp_var_option').html('');//просто очищаем заранее html блок
         $('#block_result_preview .brp_var_option').prepend('<ul class="head-option"></ul>');
+
         var product_var_option = get_product_var_option();//получем массив всех вариаций
         product_var_option.forEach(function(item, i, product_var_option) {//и проходимся по каждому
-
             //выводим html всех вариаций:
             var html = '';
             var arr_val_option = item.val_option;
@@ -108,13 +112,14 @@ jQuery(document).ready(function($) {
                     content_val = item2.name_val;
                 }
 
-                html += '<li data-value="'+ id_data_value +'" title="'+ item2.name_val +'" >'+
+                html += '<li data-value="'+ id_data_value +'" title="'+ item2.name_val +'" data-edit_id="'+i2+'" data-edit_key="name_val" data-edit_type="product_var_option:val_option" >'+
                     content_val +
                     '</li>';
             });
 
             var li = $('#block_result_preview .brp_var_option ul.head-option').prepend(
-                '<li>'+ item.name_option +
+                '<li>'+
+                '<span data-edit_id="'+i+'" data-edit_key="name_option" data-edit_type="product_var_option:name_option">'+item.name_option+'</span>'+
                 '<ul>' + html + '</ul>' +
                 '</li>'
             );
@@ -164,6 +169,7 @@ jQuery(document).ready(function($) {
                             activ_skuMap_id = arr_price.skuMap[key];//получаем эту цену
                             console.log(activ_skuMap_id);
 
+
                             var html_promo_price = '';
                             var css_price = '';
                             if (activ_skuMap_id.PromoPrice !== '') {//если имеется скидка,
@@ -183,7 +189,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('<code>Цена не указана. Возможно данный товар закончился у продавца.</code>');
+                        $('#block_result_preview .brp_price').html('<span>Цена не указана</span>');
                     }
 
                 }
@@ -196,16 +202,14 @@ jQuery(document).ready(function($) {
 
 
 
-
         //4) [ Детали продукта ] (из первой вкладки) ---------------------------------
         var product_detail = get_product_detail();
         console.log(product_detail);
-
         var html = '';
         product_detail.forEach(function(item, i, product_detail) {
             html += '<tr>';
-                html += '<td class="detail-name">'+ item.name +  '</td>';
-                html += '<td class="detail-val">'+ item.val +  '</td>';
+            html += '<td data-edit_id="'+i+'" data-edit_key="name" data-edit_type="product_detail" class="detail-name">'+ item.name +  '</td>';
+            html += '<td data-edit_id="'+i+'" data-edit_key="val" data-edit_type="product_detail" class="detail-val">'+ item.val +  '</td>';
             html += '</tr>';
         });
         html = '<table class="tab-product_detail">' + html + '</table>';
