@@ -29,8 +29,8 @@ jQuery(document).ready(function($) {
         '<div id="modal-edit" style="display:none;">' +
         '<div class="content-modal-edit">'+
         '<p><textarea></textarea></p>'+
-        '<p><button class="ok-edit"><code>OK</code></button>' +
-        '<button class="cancel-edit"><code>Отмена</code></button></p>' +
+        '<p><button class="save-edit"><code>Сохранить</code></button>' +
+        '<button class="cancel-edit"><code>Отмена</code></button>' +
         '<button class="delete-edit" style="color:red"><code>Удалить</code></button></p>' +
         '</div>'+
         '</div>';
@@ -271,6 +271,18 @@ jQuery(document).ready(function($) {
             var text = $(this).text();
             //текстовое поле (из модального окна редактирования текста)
             $modal_edit.find('textarea').val(text);
+
+            //START - Подготавливаем кнопку "удалить" для вариативных опций
+            $modal_edit.find('.delete-edit').html('<code>Удалить</code>');
+            $modal_edit.find('.delete-edit').show();
+            if (edit_type == 'product_var_option:name_option') {
+                $modal_edit.find('.delete-edit').hide();
+            }
+            if (edit_type == 'product_var_option:val_option') {
+                $modal_edit.find('.delete-edit').html('<code>Оставить только этот элемент.<br>Остальные убрать.</code>');
+            }
+            //END - Подготавливаем кнопку "удалить" для вариативных опций
+
             //открываем (модальное окно редактирования текста)
             $modal_edit.show();
             //помечаем текущий элемент статус - редактируется
@@ -278,7 +290,7 @@ jQuery(document).ready(function($) {
         });
 
         //При нажатие [OK] (из модального окна редактирования текста)
-        $('body').on('click', '#modal-edit .ok-edit', function (e) {
+        $('body').on('click', '#modal-edit .save-edit', function (e) {
             //Новый текст
             var new_text = $modal_edit.find('textarea').val().trim();
             //находим помеченный текущий элемент, у которого статус - редактируется
@@ -402,6 +414,18 @@ jQuery(document).ready(function($) {
             }
 
 
+            //data-edit_type="product_var_option:val_option"
+            if ( $modal_edit.attr('data-edit_type') == 'product_var_option:val_option' ) {
+                //id текущего элемента (из массива product_var_option)
+                sub_id = $cur_edit_element.attr('data-edit_id'); //alert('sub_id: '+sub_id);
+                id = $cur_edit_element.closest('.head-option > li').find('span[data-edit_key="name_option"]').attr('data-edit_id'); //alert('id: '+id);
+                //key = $cur_edit_element.attr('data-edit_key');//alert('key: '+key);
+                $cur_edit_element.closest('ul').find('li:not([data-edit_id="'+sub_id+'"])').detach();
+                var val_option = product_var_option[id]['val_option'][sub_id];
+                product_var_option[id]['val_option'] = [];
+                product_var_option[id]['val_option'][sub_id] = val_option;
+                console.log(product_var_option);
+            }
         });
 
 
@@ -600,7 +624,7 @@ jQuery(document).ready(function($) {
                             $_item_id.find('a')[0].click();
                         }
 
-                        if ($_item_id.hasClass('tb-out-of-stock')) {//если данная вариция товара отсутсвует
+                        if ($_item_id.hasClass('tb-out-of-stock')) {//если данная вариация товара отсутсвует
                             out_of_stock = true;
                         }
 
