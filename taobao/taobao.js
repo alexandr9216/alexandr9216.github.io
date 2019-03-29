@@ -386,6 +386,7 @@ jQuery(document).ready(function($) {
                 id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
                 $cur_edit_element.closest('table.tab-product_spec').find('[data-edit_id="'+id+'"]').closest('tr').detach();
                 delete product_spec[id];
+                $modal_edit.hide();
                 console.log(product_spec);
             }
 
@@ -396,6 +397,7 @@ jQuery(document).ready(function($) {
                 sub_id = $cur_edit_element.attr('data-edit_sub_id'); //alert('sub_id: '+sub_id);
                 $cur_edit_element.closest('tr').detach();
                 delete product_spec[id]['sub'][sub_id];
+                $modal_edit.hide();
                 console.log(product_spec);
             }
 
