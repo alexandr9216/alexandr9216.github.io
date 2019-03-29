@@ -223,7 +223,7 @@ jQuery(document).ready(function($) {
         //5) [ Спецификация продукта ] ( если есть 2-ая вкладка) ---------------------------------
         var product_spec = get_product_spec();
         if (product_spec !== undefined) { //-если существует вкладка [Спецификация продукта]
-            //console.log(product_spec);
+            console.log(product_spec);
 
             var html = '';
             product_spec.forEach(function (item, i, product_spec) {
