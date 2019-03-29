@@ -31,6 +31,7 @@ jQuery(document).ready(function($) {
         '<p><textarea></textarea></p>'+
         '<p><button class="ok-edit"><code>OK</code></button>' +
         '<button class="cancel-edit"><code>Отмена</code></button></p>' +
+        '<button class="delete-edit" style="color:red"><code>Удалить</code></button></p>' +
         '</div>'+
         '</div>';
     $('body').prepend(html_modal_edit);
@@ -258,12 +259,13 @@ jQuery(document).ready(function($) {
         var $modal_edit = $('body #modal-edit');//модальное окно редактирования текста
 
         //При нажатие на указанные элемнты:
-        $('body').on('dblclick', '#block_result_preview .brp_desc_detail td,'+
+        var elements_edit = '#block_result_preview .brp_desc_detail td,'+
             '#block_result_preview .brp_var_option ul.head-option > li > span,'+
             '#block_result_preview .brp_var_option ul.head-option ul > li,'+
             '#block_result_preview .brp_desc_spec table.tab-product_spec th,'+
-            '#block_result_preview .brp_desc_spec table.tab-product_spec td', function (e) {
+            '#block_result_preview .brp_desc_spec table.tab-product_spec td';
 
+        $('body').on('dblclick', elements_edit, function (e) {
             //что редактируем:
             var edit_type = $(this).attr('data-edit_type');//берем из текущего нажатого элемента атрибут с значением, которое говорит, что мы будем редактировать
             $modal_edit.attr('data-edit_type', edit_type);//помещаем это значение в атрибут формы редактирования
@@ -352,12 +354,33 @@ jQuery(document).ready(function($) {
             $cur_edit_element.attr('data-modal-edit', '0');
             $modal_edit.hide();
         });
+
         //При нажатие [Отмена] (из модального окна редактирования текста)
         $('body').on('click', '#modal-edit .cancel-edit', function (e) {
             var $cur_edit_element = $('#block_result_preview [data-modal-edit="1"]');
             $modal_edit.find('textarea').val('');
             $modal_edit.hide();
             $cur_edit_element.attr('data-modal-edit', '0');
+        });
+
+        //При нажатие [Удалить] (из модального окна редактирования текста)
+        $('body').on('click', '#modal-edit .delete-edit', function (e) {
+            //находим помеченный текущий элемент, у которого статус - редактируется
+            var $cur_edit_element = $('#block_result_preview [data-modal-edit="1"]');
+            var id, sub_id, key = '';
+
+            //.data-edit_type="product_detail"
+            if ( $modal_edit.attr('data-edit_type') == 'product_detail' ) {
+                //id текущего элемента (из массива product_detail)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                //ключ (name, val) текущего элемента ( из массива product_detail[id]->{name, val} )
+                //key = $cur_edit_element.attr('data-edit_key'); //alert('key: '+key);
+                //вставляем новый текст в массив product_detail[id]->{name, val}
+                delete product_detail[id];
+                $cur_edit_element.closest('tr').detach();
+                console.log(product_detail);
+            }
+
         });
 
 
