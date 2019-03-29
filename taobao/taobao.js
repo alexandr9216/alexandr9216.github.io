@@ -227,11 +227,11 @@ jQuery(document).ready(function($) {
 
             var html = '';
             product_spec.forEach(function (item, i, product_spec) {
-                html += '<tr><th colspan="2"><code>' + item['name'] + '</code></th></tr>';
+                html += '<tr><th data-edit_id="'+i+'" data-edit_type="product_spec:name" colspan="2"><code>' + item['name'] + '</code></th></tr>';
 
                 sub_item = item['sub'];
                 sub_item.forEach(function (item2, i2, sub_item) {
-                    html += '<tr><td><code>' + item2['sub_name'] + '</code></td><td><code>' + item2['sub_val'] + '</code></td></tr>';
+                    html += '<tr><td data-edit_id="'+i+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_name'] + '</code></td><td data-edit_id="'+i+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_val'] + '</code></td></tr>';
                 });
 
             });
