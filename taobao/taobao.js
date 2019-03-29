@@ -259,13 +259,11 @@ jQuery(document).ready(function($) {
         var $modal_edit = $('body #modal-edit');//модальное окно редактирования текста
 
         //При нажатие на указанные элемнты:
-        var elements_edit = '#block_result_preview .brp_desc_detail td,'+
+        $('body').on('dblclick', '#block_result_preview .brp_desc_detail td,'+
             '#block_result_preview .brp_var_option ul.head-option > li > span,'+
             '#block_result_preview .brp_var_option ul.head-option ul > li,'+
             '#block_result_preview .brp_desc_spec table.tab-product_spec th,'+
-            '#block_result_preview .brp_desc_spec table.tab-product_spec td';
-
-        $('body').on('dblclick', elements_edit, function (e) {
+            '#block_result_preview .brp_desc_spec table.tab-product_spec td', function (e) {
             //что редактируем:
             var edit_type = $(this).attr('data-edit_type');//берем из текущего нажатого элемента атрибут с значением, которое говорит, что мы будем редактировать
             $modal_edit.attr('data-edit_type', edit_type);//помещаем это значение в атрибут формы редактирования
@@ -378,8 +376,29 @@ jQuery(document).ready(function($) {
                 //вставляем новый текст в массив product_detail[id]->{name, val}
                 delete product_detail[id];
                 $cur_edit_element.closest('tr').detach();
+                $modal_edit.hide();
                 console.log(product_detail);
             }
+
+            //data-edit_type="product_spec:name"
+            if ( $modal_edit.attr('data-edit_type') == 'product_spec:name' ) {
+                //id текущего элемента (из массива product_spec)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                $cur_edit_element.closest('table.tab-product_spec').find('[data-edit_id="'+id+'"]').closest('tr').detach();
+                delete product_spec[id];
+                console.log(product_spec);
+            }
+
+            //data-edit_type="product_spec:sub_name" //data-edit_type="product_spec:sub_val"
+            if ( $modal_edit.attr('data-edit_type') == 'product_spec:sub_name' || $modal_edit.attr('data-edit_type') == 'product_spec:sub_val' ) {
+                //id текущего элемента (из массива product_spec)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                sub_id = $cur_edit_element.attr('data-edit_sub_id'); //alert('sub_id: '+sub_id);
+                $cur_edit_element.closest('tr').detach();
+                delete product_spec[id]['sub'][sub_id];
+                console.log(product_spec);
+            }
+
 
         });
 
