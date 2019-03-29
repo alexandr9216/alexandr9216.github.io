@@ -341,7 +341,7 @@ jQuery(document).ready(function($) {
             //data-edit_type="product_spec:sub_val"
             if ( $modal_edit.attr('data-edit_type') == 'product_spec:sub_val' ) {
                 //id текущего элемента (из массива product_spec)
-                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                id = $cur_edit_element.attr('data-edit_id');  //alert('id: '+id);
                 sub_id = $cur_edit_element.attr('data-edit_sub_id'); //alert('sub_id: '+sub_id);
                 product_spec[id]['sub'][sub_id]['sub_val'] = new_text;
                 console.log(product_spec);
