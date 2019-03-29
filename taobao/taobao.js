@@ -113,13 +113,13 @@ jQuery(document).ready(function($) {
                 }
 
                 html += '<li data-value="'+ id_data_value +'" title="'+ item2.name_val +'" data-edit_id="'+i2+'" data-edit_key="name_val" data-edit_type="product_var_option:val_option" >'+
-                    content_val +
+                    '<code>'+content_val +'</code>'+
                     '</li>';
             });
 
             var li = $('#block_result_preview .brp_var_option ul.head-option').prepend(
                 '<li>'+
-                '<span data-edit_id="'+i+'" data-edit_key="name_option" data-edit_type="product_var_option:name_option">'+item.name_option+'</span>'+
+                '<span data-edit_id="'+i+'" data-edit_key="name_option" data-edit_type="product_var_option:name_option"><code>'+item.name_option+'</code></span>'+
                 '<ul>' + html + '</ul>' +
                 '</li>'
             );
@@ -189,7 +189,7 @@ jQuery(document).ready(function($) {
                     }
 
                     if (!has_skuMap_id) {//Если цена НЕ найдена для текущей выделенной комбинации
-                        $('#block_result_preview .brp_price').html('<span>Цена не указана</span>');
+                        $('#block_result_preview .brp_price').html('<span><code>Цена не указана.</code></span>');
                     }
 
                 }
@@ -227,11 +227,11 @@ jQuery(document).ready(function($) {
 
             var html = '';
             product_spec.forEach(function (item, i, product_spec) {
-                html += '<tr><th colspan="2">' + item['name'] + '</th></tr>';
+                html += '<tr><th colspan="2"><code>' + item['name'] + '</code></th></tr>';
 
                 sub_item = item['sub'];
                 sub_item.forEach(function (item2, i2, sub_item) {
-                    html += '<tr><td>' + item2['sub_name'] + '</td><td>' + item2['sub_val'] + '</td></tr>';
+                    html += '<tr><td><code>' + item2['sub_name'] + '</code></td><td><code>' + item2['sub_val'] + '</code></td></tr>';
                 });
 
             });
