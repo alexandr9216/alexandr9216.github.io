@@ -231,7 +231,7 @@ jQuery(document).ready(function($) {
 
                 sub_item = item['sub'];
                 sub_item.forEach(function (item2, i2, sub_item) {
-                    html += '<tr><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_name'] + '</code></td><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_val'] + '</code></td></tr>';
+                    html += '<tr><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_name'] + '</code></td><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_val"><code>' + item2['sub_val'] + '</code></td></tr>';
                 });
 
             });
@@ -324,7 +324,7 @@ jQuery(document).ready(function($) {
             //data-edit_type="product_spec:name"
             if ( $modal_edit.attr('data-edit_type') == 'product_spec:name' ) {
                 //id текущего элемента (из массива product_spec)
-                id = $cur_edit_element.attr('data-edit_id'); alert('id: '+id);
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
                 product_spec[id]['name'] = new_text;
                 console.log(product_spec);
             }
