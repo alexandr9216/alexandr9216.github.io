@@ -52,6 +52,7 @@
     position: absolute;
     top: -13px;
     right: 0px;
+    font-size: 14px;
 }
 
 #block_result_preview .brp_price {
