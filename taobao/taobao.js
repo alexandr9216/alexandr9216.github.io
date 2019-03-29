@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 
     // Your code here...
 
-
+    //модальное окно предпросмотра данных о товаре
     var html_block_result_preview = '' +
         '<div id="block_result_preview">' +
             '<div class="brp_title"><textarea></textarea></div>'+
@@ -15,9 +15,6 @@ jQuery(document).ready(function($) {
             '<div class="brp_desc_content"></div>'+
         ''+
     '';
-
-    //$('body').prepend(html_block_result_preview);
-
     var modal = ''+
         '<div id="ex1" class="modal">'+
         '<p>'+ html_block_result_preview +'</p>'+
@@ -27,7 +24,20 @@ jQuery(document).ready(function($) {
     $('body').prepend(modal);
 
 
+    //модальное окно редактирования текста элементов
+    var html_modal_edit = '' +
+        '<div id="modal-edit" style="display:none;">' +
+        '<div class="content-modal-edit">'+
+        '<p><textarea></textarea></p>'+
+        '<p><button class="ok-edit"><code>OK</code></button>' +
+        '<button class="cancel-edit"><code>Отмена</code></button></p>' +
+        '</div>'+
+        '</div>';
+    $('body').prepend(html_modal_edit);
 
+
+
+    //Блок с кнопкой запуска парсинга данных
     var title = $("#J_DetailMeta .tb-detail-hd h1").text();
     var title_desc = $("#J_DetailMeta .tb-detail-hd .newp").text();
 
@@ -51,7 +61,7 @@ jQuery(document).ready(function($) {
     //$('#J_LinkBuy').trigger('click');
 
     //click
-    //-------------------------------------------------------------------------
+    //Старт парсинга данных-------------------------------------------------------------------------
     $('body').on('click', '#wolf-block-taobao #start-test-wolf', function (e) {
 
 
@@ -235,6 +245,85 @@ jQuery(document).ready(function($) {
         $('#block_result_preview .brp_desc_content').html( get_desc_content() );
         $('body').on('click', '#block_result_preview .brp_desc_content .btn-delete', function (e) {
             $(this).closest('.wrap-img').detach();
+        });
+
+
+
+
+        //7) Редактирование текста в элементах ---------------------------------
+        var $modal_edit = $('body #modal-edit');//модальное окно редактирования текста
+
+        //При нажатие на указанные элемнты:
+        $('body').on('dblclick', '#block_result_preview .brp_desc_detail td,'+
+            '#block_result_preview .brp_var_option ul.head-option > li > span,'+
+            '#block_result_preview .brp_var_option ul.head-option ul > li', function (e) {
+            //что редактируем:
+            var edit_type = $(this).attr('data-edit_type');//берем из текущего нажатого элемента атрибут с значением, которое говорит, что мы будем редактировать
+            $modal_edit.attr('data-edit_type', edit_type);//помещаем это значение в атрибут формы редактирования
+            //старый текст
+            var text = $(this).text();
+            //текстовое поле (из модального окна редактирования текста)
+            $modal_edit.find('textarea').val(text);
+            //открываем (модальное окно редактирования текста)
+            $modal_edit.show();
+            //помечаем текущий элемент статус - редактируется
+            $(this).attr('data-modal-edit', '1');
+        });
+
+        //При нажатие [OK] (из модального окна редактирования текста)
+        $('body').on('click', '#modal-edit .ok-edit', function (e) {
+            //Новый текст
+            var new_text = $modal_edit.find('textarea').val().trim();
+            //находим помеченный текущий элемент, у которого статус - редактируется
+            var $cur_edit_element = $('#block_result_preview [data-modal-edit="1"]');
+            //вставляем новый текст в редактируемый элемент
+            $cur_edit_element.html('<code>'+new_text+'</code>');
+            var id, sub_id, key = '';
+
+            //Проверяем, какое знчение на данный в форме (должно быть взято значение из data-edit_type текущего нажатого элемента),
+            //это значение говорит, что мы редактировали и что будем сохронять
+            //.data-edit_type="product_detail"
+            if ( $modal_edit.attr('data-edit_type') == 'product_detail' ) {
+                //id текущего элемента (из массива product_detail)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                //ключ (name, val) текущего элемента ( из массива product_detail[id]->{name, val} )
+                key = $cur_edit_element.attr('data-edit_key'); //alert('key: '+key);
+                //вставляем новый текст в массив product_detail[id]->{name, val}
+                product_detail[id][key] = new_text;
+                console.log(product_detail);
+            }
+
+            //data-edit_type="product_var_option:name_option"
+            if ( $modal_edit.attr('data-edit_type') == 'product_var_option:name_option' ) {
+                //id текущего элемента (из массива product_var_option)
+                id = $cur_edit_element.attr('data-edit_id');//alert('id: '+id);
+                //key = $cur_edit_element.attr('data-edit_key');//alert('key: '+key);
+                //вставляем новый текст в массив product_var_option[id]->{'name_option'}
+                product_var_option[id]['name_option'] = new_text;
+                console.log(product_var_option);
+            }
+
+            //data-edit_type="product_var_option:val_option"
+            if ( $modal_edit.attr('data-edit_type') == 'product_var_option:val_option' ) {
+                //id текущего элемента (из массива product_var_option)
+                sub_id = $cur_edit_element.attr('data-edit_id'); alert('sub_id: '+sub_id);
+                id = $cur_edit_element.closest('.head-option > li').find('span[data-edit_key="name_option"]').attr('data-edit_id'); alert('id: '+id);
+                //key = $cur_edit_element.attr('data-edit_key');//alert('key: '+key);
+                //вставляем новый текст в массив product_var_option[id]->{'name_option'}
+                product_var_option[id]['val_option'][sub_id]['name_val'] = new_text;
+                console.log(product_var_option);
+            }
+
+            //убераем статус - редактируется = 0
+            $cur_edit_element.attr('data-modal-edit', '0');
+            $modal_edit.hide();
+        });
+        //При нажатие [Отмена] (из модального окна редактирования текста)
+        $('body').on('click', '#modal-edit .cancel-edit', function (e) {
+            var $cur_edit_element = $('#block_result_preview [data-modal-edit="1"]');
+            $modal_edit.find('textarea').val('');
+            $modal_edit.hide();
+            $cur_edit_element.attr('data-modal-edit', '0');
         });
 
 
