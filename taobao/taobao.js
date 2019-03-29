@@ -208,8 +208,8 @@ jQuery(document).ready(function($) {
         var html = '';
         product_detail.forEach(function(item, i, product_detail) {
             html += '<tr>';
-            html += '<td data-edit_id="'+i+'" data-edit_key="name" data-edit_type="product_detail" class="detail-name">'+ item.name +  '</td>';
-            html += '<td data-edit_id="'+i+'" data-edit_key="val" data-edit_type="product_detail" class="detail-val">'+ item.val +  '</td>';
+            html += '<td data-edit_id="'+i+'" data-edit_key="name" data-edit_type="product_detail" class="detail-name"><code>'+ item.name +  '</code></td>';
+            html += '<td data-edit_id="'+i+'" data-edit_key="val" data-edit_type="product_detail" class="detail-val"><code>'+ item.val +  '</code></td>';
             html += '</tr>';
         });
         html = '<table class="tab-product_detail">' + html + '</table>';
