@@ -424,6 +424,7 @@ jQuery(document).ready(function($) {
                 var val_option = product_var_option[id]['val_option'][sub_id];
                 product_var_option[id]['val_option'] = [];
                 product_var_option[id]['val_option'][sub_id] = val_option;
+                $modal_edit.hide();
                 console.log(product_var_option);
             }
         });
