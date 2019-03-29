@@ -260,9 +260,10 @@ jQuery(document).ready(function($) {
         //При нажатие на указанные элемнты:
         $('body').on('dblclick', '#block_result_preview .brp_desc_detail td,'+
             '#block_result_preview .brp_var_option ul.head-option > li > span,'+
-            '#block_result_preview .brp_var_option ul.head-option ul > li'+
-            '#block_result_preview .brp_desc_spec table.tab-product_spec th'+
+            '#block_result_preview .brp_var_option ul.head-option ul > li,'+
+            '#block_result_preview .brp_desc_spec table.tab-product_spec th,'+
             '#block_result_preview .brp_desc_spec table.tab-product_spec td', function (e) {
+
             //что редактируем:
             var edit_type = $(this).attr('data-edit_type');//берем из текущего нажатого элемента атрибут с значением, которое говорит, что мы будем редактировать
             $modal_edit.attr('data-edit_type', edit_type);//помещаем это значение в атрибут формы редактирования
