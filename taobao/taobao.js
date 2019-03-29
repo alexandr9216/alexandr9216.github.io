@@ -231,7 +231,7 @@ jQuery(document).ready(function($) {
 
                 sub_item = item['sub'];
                 sub_item.forEach(function (item2, i2, sub_item) {
-                    html += '<tr><td data-edit_id="'+i+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_name'] + '</code></td><td data-edit_id="'+i+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_val'] + '</code></td></tr>';
+                    html += '<tr><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_name'] + '</code></td><td data-edit_id="'+i+'" data-edit_sub_id="'+i2+'" data-edit_type="product_spec:sub_name"><code>' + item2['sub_val'] + '</code></td></tr>';
                 });
 
             });
@@ -260,7 +260,9 @@ jQuery(document).ready(function($) {
         //При нажатие на указанные элемнты:
         $('body').on('dblclick', '#block_result_preview .brp_desc_detail td,'+
             '#block_result_preview .brp_var_option ul.head-option > li > span,'+
-            '#block_result_preview .brp_var_option ul.head-option ul > li', function (e) {
+            '#block_result_preview .brp_var_option ul.head-option ul > li'+
+            '#block_result_preview .brp_desc_spec table.tab-product_spec th'+
+            '#block_result_preview .brp_desc_spec table.tab-product_spec td', function (e) {
             //что редактируем:
             var edit_type = $(this).attr('data-edit_type');//берем из текущего нажатого элемента атрибут с значением, которое говорит, что мы будем редактировать
             $modal_edit.attr('data-edit_type', edit_type);//помещаем это значение в атрибут формы редактирования
@@ -310,13 +312,40 @@ jQuery(document).ready(function($) {
             //data-edit_type="product_var_option:val_option"
             if ( $modal_edit.attr('data-edit_type') == 'product_var_option:val_option' ) {
                 //id текущего элемента (из массива product_var_option)
-                sub_id = $cur_edit_element.attr('data-edit_id'); alert('sub_id: '+sub_id);
-                id = $cur_edit_element.closest('.head-option > li').find('span[data-edit_key="name_option"]').attr('data-edit_id'); alert('id: '+id);
+                sub_id = $cur_edit_element.attr('data-edit_id'); //alert('sub_id: '+sub_id);
+                id = $cur_edit_element.closest('.head-option > li').find('span[data-edit_key="name_option"]').attr('data-edit_id'); //alert('id: '+id);
                 //key = $cur_edit_element.attr('data-edit_key');//alert('key: '+key);
                 //вставляем новый текст в массив product_var_option[id]->{'name_option'}
                 product_var_option[id]['val_option'][sub_id]['name_val'] = new_text;
                 console.log(product_var_option);
             }
+
+            //data-edit_type="product_spec:name"
+            if ( $modal_edit.attr('data-edit_type') == 'product_spec:name' ) {
+                //id текущего элемента (из массива product_spec)
+                id = $cur_edit_element.attr('data-edit_id'); alert('id: '+id);
+                product_spec[id]['name'] = new_text;
+                console.log(product_spec);
+            }
+
+            //data-edit_type="product_spec:sub_name"
+            if ( $modal_edit.attr('data-edit_type') == 'product_spec:sub_name' ) {
+                //id текущего элемента (из массива product_spec)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                sub_id = $cur_edit_element.attr('data-edit_sub_id'); //alert('sub_id: '+sub_id);
+                product_spec[id]['sub'][sub_id]['sub_name'] = new_text;
+                console.log(product_spec);
+            }
+
+            //data-edit_type="product_spec:sub_val"
+            if ( $modal_edit.attr('data-edit_type') == 'product_spec:sub_val' ) {
+                //id текущего элемента (из массива product_spec)
+                id = $cur_edit_element.attr('data-edit_id'); //alert('id: '+id);
+                sub_id = $cur_edit_element.attr('data-edit_sub_id'); //alert('sub_id: '+sub_id);
+                product_spec[id]['sub'][sub_id]['sub_val'] = new_text;
+                console.log(product_spec);
+            }
+
 
             //убераем статус - редактируется = 0
             $cur_edit_element.attr('data-modal-edit', '0');
